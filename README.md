@@ -1,6 +1,6 @@
 # BCR 4504 Team Documentation
 
-[![CI](https://github.com/BC-Robotics-4504/bcr-docs/actions/workflows/vercel-prod.yml/badge.svg?branch=main)](https://github.com/BC-Robotics-4504/bcr-docs/actions/workflows/vercel-prod.yml)
+[![CI](https://github.com/BC-Robotics-4504/bcr-docs/actions/workflows/vercel-prod.yml/badge.svg?branch=master)](https://github.com/BC-Robotics-4504/bcr-docs/actions/workflows/vercel-prod.yml)
 [![License](https://img.shields.io/github/license/BC-Robotics-4504/bcr-docs?color=blue)](https://github.com/BC-Robotics-4504/bcr-docs/blob/main/LICENSE)
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
