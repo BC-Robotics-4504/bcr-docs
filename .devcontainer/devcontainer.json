@@ -22,7 +22,8 @@
         "aaron-bond.better-comments",
         "davidanson.vscode-markdownlint",
         "github.vscode-pull-request-github",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "unifiedjs.vscode-mdx"
       ],
       "settings": {
         "editor.formatOnSave": true,

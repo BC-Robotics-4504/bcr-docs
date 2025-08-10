@@ -1,0 +1,158 @@
+---
+const cards = [
+  {
+    title: "Mechanical",
+    desc: "Frames, drivetrains, motion, fasteners, and assembly notes.",
+    href: "/mechanical/",
+    icon: "wrench",
+  },
+  {
+    title: "Electrical",
+    desc: "Power distro, wiring standards, safety, and testing.",
+    href: "/electrical/",
+    icon: "bolt",
+  },
+  {
+    title: "Programming",
+    desc: "Code structure, tooling, deployment, and debugging.",
+    href: "/programming/",
+    icon: "code",
+  },
+  {
+    title: "CAD",
+    desc: "Modeling conventions, drawings, exports, BOM.",
+    href: "/cad/",
+    icon: "box",
+  },
+  {
+    title: "Impact",
+    desc: "Outreach, documentation, branding, and team ops.",
+    href: "/impact/",
+    icon: "heart",
+  },
+];
+---
+
+<section class="wrap">
+  <header class="hero">
+    <h1>Team Guides</h1>
+    <p>Your quick jump to the core sections.</p>
+  </header>
+
+  <div class="cards">
+    {cards.map((c) => (
+      <a class="card" href={c.href} aria-label={`${c.title} — ${c.desc}`}>
+        <div class="icon" data-icon={c.icon} aria-hidden="true"></div>
+        <div class="content">
+          <h2 class="title">{c.title}</h2>
+          <p class="desc">{c.desc}</p>
+          <span class="cta">Open →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* use Starlight’s CSS variables with safe fallbacks */
+  :root{
+    /* fallbacks if Starlight vars aren’t present for some reason */
+    --_bg: var(--sl-color-bg, #0b1020);
+    --_panel: var(--sl-color-bg-inline-code, #fff);
+    --_text: var(--sl-color-text, #0b1020);
+    --_muted: var(--sl-color-gray-2, #6b7280);
+    --_border: var(--sl-color-hairline, rgba(0,0,0,0.08));
+    --_accent: var(--sl-color-accent, #4f46e5);
+    --_shadow: var(--sl-shadow-md, 0 6px 24px rgba(0,0,0,.08));
+    --_radius: 14px;
+  }
+
+  .wrap {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+
+  .hero {
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+    line-height: 1.15;
+    margin: 0 0 .25rem 0;
+    color: var(--_text);
+  }
+  .hero p {
+    margin: 0 0 1rem 0;
+    color: var(--_muted);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    gap: .9rem;
+    padding: 1rem;
+    border-radius: var(--_radius);
+    background: var(--_panel);
+    color: var(--_text);
+    text-decoration: none;
+    border: 1px solid var(--_border);
+    box-shadow: var(--_shadow);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    border-color: color-mix(in oklab, var(--_accent) 25%, var(--_border));
+  }
+  .card:focus-visible {
+    outline: 3px solid color-mix(in oklab, var(--_accent) 65%, white);
+    outline-offset: 3px;
+  }
+
+  .icon {
+    flex: 0 0 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: color-mix(in oklab, var(--_accent) 16%, white);
+    display: grid;
+    place-items: center;
+    border: 1px solid color-mix(in oklab, var(--_accent) 35%, var(--_border));
+  }
+  .icon::before{
+    /* tiny inline “icon set” via CSS shapes */
+    content: "";
+    width: 20px; height: 20px;
+    display: block;
+    mask: var(--_mask) center / contain no-repeat;
+    background: color-mix(in oklab, var(--_accent) 85%, black);
+  }
+  /* pick mask per data-icon value */
+  .icon[data-icon="wrench"]   { --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M21.1 7.9a6 6 0 0 1-7.9 7.9l-6.3 6.3-2.1-2.1 6.3-6.3A6 6 0 0 1 16.1 3a4 4 0 0 0 5 5z"/></svg>'); }
+  .icon[data-icon="bolt"]     { --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>'); }
+  .icon[data-icon="code"]     { --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M9 18 3 12l6-6 1.5 1.5L6 12l4.5 4.5L9 18zm6 0 1.5-1.5L21 12l-4.5-4.5L15 6l6 6-6 6z"/></svg>'); }
+  .icon[data-icon="box"]      { --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M12 2 2 7l10 5 10-5-10-5zm0 7L2 4v13l10 5 10-5V4l-10 5z"/></svg>'); }
+  .icon[data-icon="heart"]    { --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M12 21s-7-4.6-9.5-8A5.6 5.6 0 0 1 12 5a5.6 5.6 0 0 1 9.5 8C19 16.4 12 21 12 21z"/></svg>'); }
+
+  .content { display: grid; gap: .25rem; align-content: start; }
+  .title { margin: 0; font-size: 1.05rem; line-height: 1.25; }
+  .desc { margin: 0; color: var(--_muted); font-size: .95rem; }
+  .cta  { margin-top: .15rem; font-weight: 600; color: var(--_accent); font-size: .95rem; }
+
+  @media (prefers-color-scheme: dark) {
+    :root{
+      --_panel: var(--sl-color-bg, #0b1020);
+      --_text: var(--sl-color-text, #e5e7eb);
+      --_muted: var(--sl-color-gray-4, #a3a3a3);
+      --_border: var(--sl-color-hairline, rgba(255,255,255,0.08));
+      --_shadow: 0 6px 22px rgba(0,0,0,.35);
+    }
+    .card { border-color: var(--_border); }
+  }
+</style>
