@@ -1,0 +1,29 @@
+{
+  "name": "Ubuntu Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"   // change Node version if needed
+    }
+  },
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "Astro Dev Server",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "astro-build.astro-vscode",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install",
+  "remoteUser": "vscode"
+}

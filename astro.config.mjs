@@ -23,4 +23,9 @@ export default defineConfig({
 			],
 		}),
 	],
+	server: {
+    host: '0.0.0.0',   // not just `true` — force IPv4 all-ifaces
+    port: 4321,
+    // helps HMR through the forwarded port
+  },
 });
