@@ -1,4 +1,13 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "esbenp.prettier-vscode",
+    "astro-build.astro-vscode",
+    "github.vscode-github-actions",
+    "aaron-bond.better-comments",
+    "davidanson.vscode-markdownlint",
+    "github.vscode-pull-request-github",
+    "eamodio.gitlens"
+  ],
   "unwantedRecommendations": []
 }

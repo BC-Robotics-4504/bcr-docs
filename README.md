@@ -1,49 +1,43 @@
-# Starlight Starter Kit: Basics
+# BCR 4504 Team Documentation
 
+[![CI](https://github.com/BCR4504/docs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BCR4504/docs/actions/workflows/ci.yml)  
+[![License](https://img.shields.io/github/license/BCR4504/docs?color=blue)](https://github.com/BCR4504/docs/blob/main/LICENSE)  
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-```
-npm create astro@latest -- --template starlight
-```
+Welcome to the **official documentation site** for **FRC Team BCR 4504**.  
+This site contains resources, guides, and reference material for our team members, mentors, and supporters.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+We use [Astro](https://astro.build) with the [Starlight](https://starlight.astro.build) theme to provide a fast, modern, and easy-to-navigate documentation experience.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## 📂 Project Structure
 
-```
+Our documentation site follows a clear and organized file structure for easy collaboration:
+
 .
-├── public/
+├── public/ # Static assets served as-is (e.g., favicon, robots.txt)
 ├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
+│ ├── assets/ # Images, diagrams, and other media used in docs
+│ ├── content/
+│ │ └── docs/ # Main documentation content (.md or .mdx files)
+│ └── content.config.ts # Content collection configuration
+├── astro.config.mjs # Astro configuration file
+├── package.json # Project metadata and dependencies
+└── tsconfig.json # TypeScript configuration
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+**Key points:**
+- Documentation pages are stored in `src/content/docs/`.
+- Images and diagrams go in `src/assets/` and can be referenced in Markdown.
+- Anything in `public/` is served directly without processing.
 
-Static assets, like favicons, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
+## 🙌 Credits
 
-All commands are run from the root of the project, from a terminal:
+We’d like to thank the following projects and services that make this documentation possible:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+- [Astro](https://astro.build) — For the static site framework.
+- [Starlight](https://starlight.astro.build) — For the documentation theme.
+- [Netlify](https://www.netlify.com) — For hosting and continuous deployment.
