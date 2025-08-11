@@ -12,17 +12,11 @@ export default defineConfig({
       customCss: ['./src/styles/global.css'],
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
       sidebar: [
-        {
-          label: 'Guides',
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: 'Example Guide', slug: 'guides/example' },
-          ],
-        },
-        {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
-        },
+        { label: 'Mechanical', autogenerate: { directory: 'mechanical' } },
+        { label: 'Electrical', autogenerate: { directory: 'electrical' } },
+        { label: 'Programming', autogenerate: { directory: 'programming' } },
+        { label: 'CAD',        autogenerate: { directory: 'cad' } },
+
       ],
     }),
   ],

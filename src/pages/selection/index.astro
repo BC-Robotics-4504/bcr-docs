@@ -12,7 +12,7 @@ const cards = [
     title: 'Electrical',
     desc: 'Power distro, wiring standards, safety, and testing.',
     href: '/electrical/',
-    icon: 'bolt',
+    icon: 'bolt-lightning',
   },
   {
     title: 'Programming',
@@ -24,7 +24,7 @@ const cards = [
     title: 'CAD',
     desc: 'Modeling conventions, drawings, exports, BOM.',
     href: '/cad/',
-    icon: 'box',
+    icon: 'cube',
   },
   {
     title: 'Impact',
@@ -35,22 +35,32 @@ const cards = [
 ];
 ---
 
-<StarlightPage frontmatter={{ title: 'Team Guides', template: 'splash' }}>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+
+<StarlightPage frontmatter={{ title: '', template: 'splash' }}>
   <section class="wrap">
-    <header class="hero">
-      <h1>Team Guides</h1>
-      <p>Your quick jump to the core sections.</p>
-    </header>
+    <h1 class="page-title">Team Guides</h1>
+    <p class="page-subtitle">Your quick jump to the core sections.</p>
 
     <div class="cards">
       {
         cards.map((c) => (
           <a class="card" href={c.href} aria-label={`${c.title} — ${c.desc}`}>
-            <div class="icon" data-icon={c.icon} aria-hidden="true" />
+            <div class="icon" aria-hidden="true">
+              <i class={`fa-solid fa-${c.icon}`}></i>
+            </div>
             <div class="content">
               <h2 class="title">{c.title}</h2>
               <p class="desc">{c.desc}</p>
-              <span class="cta">Open →</span>
+              <span class="cta">Open -></span>
             </div>
           </a>
         ))
@@ -60,9 +70,7 @@ const cards = [
 </StarlightPage>
 
 <style>
-  /* use Starlight’s CSS variables with safe fallbacks */
   :root {
-    /* fallbacks if Starlight vars aren’t present for some reason */
     --_bg: var(--sl-color-bg, #0b1020);
     --_panel: var(--sl-color-bg-inline-code, #fff);
     --_text: var(--sl-color-text, #0b1020);
@@ -77,47 +85,45 @@ const cards = [
     margin: 0 auto;
     max-width: 1000px;
     padding: clamp(1rem, 3vw, 2rem);
+    text-align: center;
   }
 
-  .hero {
-    margin-bottom: 1rem;
-  }
-  .hero h1 {
-    font-size: clamp(1.75rem, 2.8vw, 2.25rem);
-    line-height: 1.15;
-    margin: 0 0 0.25rem 0;
+  .page-title {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    margin: 0;
     color: var(--_text);
   }
-  .hero p {
-    margin: 0 0 1rem 0;
+
+  .page-subtitle {
     color: var(--_muted);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
   }
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: clamp(0.9rem, 2vw, 1.25rem);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 1.75rem);
   }
 
   .card {
     position: relative;
     display: flex;
-    gap: 0.9rem;
-    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
     border-radius: var(--_radius);
     background: var(--_panel);
     color: var(--_text);
     text-decoration: none;
     border: 1px solid var(--_border);
     box-shadow: var(--_shadow);
-    transition:
-      transform 0.18s ease,
-      box-shadow 0.18s ease,
-      border-color 0.18s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   }
   .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.15);
     border-color: color-mix(in oklab, var(--_accent) 25%, var(--_border));
   }
   .card:focus-visible {
@@ -126,60 +132,38 @@ const cards = [
   }
 
   .icon {
-    flex: 0 0 42px;
-    height: 42px;
-    border-radius: 11px;
-    background: color-mix(in oklab, var(--_accent) 16%, white);
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--_accent) 16%, rgb(229, 232, 235));
     display: grid;
     place-items: center;
     border: 1px solid color-mix(in oklab, var(--_accent) 35%, var(--_border));
-  }
-  .icon::before {
-    /* tiny inline “icon set” via CSS shapes */
-    content: '';
-    width: 20px;
-    height: 20px;
-    display: block;
-    mask: var(--_mask) center / contain no-repeat;
-    background: color-mix(in oklab, var(--_accent) 85%, black);
-  }
-  /* pick mask per data-icon value */
-  .icon[data-icon='wrench'] {
-    --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M21.1 7.9a6 6 0 0 1-7.9 7.9l-6.3 6.3-2.1-2.1 6.3-6.3A6 6 0 0 1 16.1 3a4 4 0 0 0 5 5z"/></svg>');
-  }
-  .icon[data-icon='bolt'] {
-    --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>');
-  }
-  .icon[data-icon='code'] {
-    --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M9 18 3 12l6-6 1.5 1.5L6 12l4.5 4.5L9 18zm6 0 1.5-1.5L21 12l-4.5-4.5L15 6l6 6-6 6z"/></svg>');
-  }
-  .icon[data-icon='box'] {
-    --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M12 2 2 7l10 5 10-5-10-5zm0 7L2 4v13l10 5 10-5V4l-10 5z"/></svg>');
-  }
-  .icon[data-icon='heart'] {
-    --_mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="%23000" d="M12 21s-7-4.6-9.5-8A5.6 5.6 0 0 1 12 5a5.6 5.6 0 0 1 9.5 8C19 16.4 12 21 12 21z"/></svg>');
+    font-size: 28px;
+    color: color-mix(in oklab, var(--_accent) 85%, black);
   }
 
   .content {
     display: grid;
-    gap: 0.25rem;
+    gap: 0.4rem;
     align-content: start;
+    text-align: center;
   }
   .title {
     margin: 0;
-    font-size: 1.05rem;
-    line-height: 1.25;
+    font-size: 1.2rem;
+    line-height: 1.3;
   }
   .desc {
     margin: 0;
     color: var(--_muted);
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   .cta {
-    margin-top: 0.15rem;
+    margin-top: 0.3rem;
     font-weight: 600;
     color: var(--_accent);
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   @media (prefers-color-scheme: dark) {
