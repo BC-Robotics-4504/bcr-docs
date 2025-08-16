@@ -7,8 +7,6 @@
 Welcome to the **official documentation site** for **FRC Team BCR 4504**.
 This site contains resources, guides, and reference material for our team members, mentors, and supporters.
 
-We use [Astro](https://astro.build) with the [Starlight](https://starlight.astro.build) theme to provide a fast, modern, and easy-to-navigate documentation experience.
-
 ---
 
 ## 📂 Project Structure
@@ -37,10 +35,16 @@ Our documentation site follows a clear and organized file structure for easy col
 
 ---
 
+## Contributing
+
+1. Clone the repo with `git clone https://github.com/BC-Robotics-4504/bcr-docs`
+2. Checkout a new branch with `git switch -c {feature_name}`
+3. Submit a pull-request to have your contribution merged onto the master branch.
+
 ## 🙌 Credits
 
 We’d like to thank the following projects and services that make this documentation possible:
 
 - [Astro](https://astro.build) — For the static site framework.
 - [Starlight](https://starlight.astro.build) — For the documentation theme.
-- [Netlify](https://www.netlify.com) — For hosting and continuous deployment.
+
