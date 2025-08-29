@@ -1,6 +1,150 @@
 ---
-title: Git 
+title: Git & GitHub Guide
 description: "What is Git and How to use GitHub"
 sidebar:
-    order: 3
+  order: 3
 ---
+
+import { Icon } from '@astrojs/starlight/components'
+
+
+This guide explains **what Git is**, how to use **GitHub**, and how to contribute to our team’s code and documentation.
+
+---
+
+## What is Git?
+
+**Git** is a tool that tracks changes in files over time.
+It lets multiple people work on the same code without overwriting each other.
+
+Think of Git like Google Docs “version history” but for **robot code, CAD, and docs**.
+
+---
+
+## What is GitHub?
+
+**GitHub** is a website where we store our Git repositories (repos) online.
+It makes it easy for our team to share code, track issues, and collaborate.
+
+Our team’s main GitHub organization is:
+👉 [https://github.com/BC-Robotics-4504](https://github.com/BC-Robotics-4504) (BC Robotics)
+
+---
+
+## Getting Started
+
+### 1. Install Git
+- **Windows:** download [Git for Windows](https://git-scm.com/download/win)
+- **Mac:** use Homebrew → `brew install git`
+- **Linux:** use your package manager (Ubuntu → `sudo apt install git`)
+
+Check it works:
+
+```bash
+git --version
+```
+
+---
+
+### 2. Set Your Identity
+Tell Git who you are (this shows up in commit history):
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+---
+
+### 3. Make a GitHub Account
+- Go to [github.com](https://github.com)
+- Create an account with your school or personal email
+- Ask a mentor to add you to **Team 4504’s GitHub org**
+
+---
+
+### 4. Clone the Repo
+Cloning means copying a repo from GitHub onto your computer.
+
+Example for our robot code repo:
+
+```bash
+git clone https://github.com/Team4504/robot-code.git
+cd robot-code
+```
+
+---
+
+### 5. Make a Branch
+Branches are “copies” where you can safely make changes.
+
+```bash
+git checkout -b my-first-change
+```
+
+---
+
+### 6. Make Changes
+Open files in your editor (we recommend [**VS Code**](https://code.visualstudio.com/)).
+Change code, docs, or CAD files.
+
+---
+
+### 7. Save Your Changes (Commit)
+Stage and commit your edits:
+
+```bash
+git add .
+git commit -m "my first commit: fixed drivetrain constants"
+```
+
+---
+
+### 8. Push to GitHub
+Send your changes up to GitHub:
+
+```bash
+git push -u origin my-first-change
+```
+
+---
+
+### 9. Open a Pull Request (PR)
+- Go to the repo on GitHub
+- You’ll see “Compare & Pull Request”
+- Describe what you changed
+- Ask for a review → mentors or leads will merge it
+
+---
+
+## Common Commands
+
+```bash
+# check what files changed
+git status
+
+# see commit history
+git log --oneline
+
+# switch to another branch
+git checkout main
+
+# get the newest updates from GitHub
+git pull origin main
+```
+
+## Video Tutorial
+
+This video from Fireship does a good job of explaining the basic git concepts:
+
+<div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+  <iframe
+    src="https://www.youtube.com/embed/hwP7WQkmECE"
+    title="Git Explained in 100 Seconds"
+    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>
+</div>

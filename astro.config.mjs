@@ -18,7 +18,7 @@ export default defineConfig({
         { label: 'CAD',        autogenerate: { directory: 'cad' } },
 
       ],
-      favicon: 'public/favicon.svg'
+      favicon: '/book.svg'
     }),
   ],
 

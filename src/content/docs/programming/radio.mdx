@@ -2,3 +2,84 @@
 title: Configuring the Radio
 description: "This guide shows the reader how to properly configure the Vivid Hosting FRC Radio"
 ---
+
+import {LinkCard, Steps, Icon, Aside} from '@astrojs/starlight/components'
+
+## Flashing and Configuring the Radio at Home 🏠
+
+Flashing your radio requires setting up your network interface, powering the radio correctly, and then using the web interface to upload new firmware and configure it for home use. Follow these steps to get started.
+
+<Steps>
+
+<ol>
+  <li>
+    <h3>Prepare Your Computer</h3>
+    <ul>
+      <li>
+        Download the <strong><a href="https://4239402461-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FzaDthb1gXvbj84qIfOUE%2Fuploads%2FJH9mvCiIVx33X8PlpHVK%2Fvh_network_assistant.zip?alt=media&token=a461c2fb-7fa0-4023-9264-ebcfeca0561c">VH-Network Assistant Tool</a></strong>
+      </li>
+      <li>Extract and run the tool.</li>
+      <li>This program will automatically configure your computer’s <strong>Ethernet interface</strong> to communicate with the radio.</li>
+    </ul>
+  </li>
+
+  <li>
+    <h3>Power the Radio</h3>
+    <ul>
+      <li><strong>Option A: POE (Power over Ethernet)</strong> — Plug the POE injector into the <strong>POE port</strong> on the radio. Flip the switch on the back to enable POE mode.</li>
+      <li><strong>Option B: VRM Power Supply</strong> — Use the VRM with ferrules to provide <strong>12V / 2A</strong> to the radio.</li>
+    </ul>
+  </li>
+    <Aside type="danger">
+    Ensure that you don't use POE on a non ethernet port as that could result in you damaging the radio, also ensure that you do not pass too much current into the radio as that could fry it.
+    </Aside>
+  <li>
+    <h3>Connect to the Radio</h3>
+    <ul>
+      <li>Connect the <strong>DS port</strong> on the radio to your computer’s Ethernet port.</li>
+      <li>Open the <strong>VH-Network Assistant Tool</strong>, choose <strong>Ethernet</strong> as the interface, and click <strong>Configure</strong>.</li>
+      <li>Once complete, click <strong>Open Web Interface</strong> to launch the management page in your browser.</li>
+    </ul>
+  </li>
+
+  <li>
+    <h3>Flash the Firmware</h3>
+    <ol>
+      <li>Go to the bottom of the webpage where it says <strong>Firmware</strong>.</li>
+      <li>Upload the firmware <code>.bin</code> or <code>.img</code> file provided by the manufacturer. This can be found at the offical docs site for the <a href="https://frc-radio.vivid-hosting.net/overview/firmware-releases">VH-109</a></li>
+      <li>Wait for the flashing process to finish—the radio will reboot automatically.</li>
+    </ol>
+
+    <Aside type="caution">
+      Do <strong>not</strong> power off the device while flashing firmware. As this will likely brick your radio.
+    </Aside>
+  </li>
+
+  <li>
+    <h3>Configure WiFI </h3>
+    <ul>
+      <li>Select <strong>Access Point Mode</strong></li>
+      <li><strong>Set the Team Number of your robot (ex: 4504)</strong></li>
+      <li><strong>Network Settings:</strong> Set a recognizable SSID</li>
+      <li><strong>Set a password</strong></li>
+      <li><strong>Set the Wifi Channel (ex: 5) </strong></li>
+      <li><strong>Toggle the AP</strong> switch on the back of the radio to the on positon, otherwise the radio will not post a WiFi network.</li>
+
+
+      <li><strong>Save & Reboot:</strong> Apply settings, connect the radio to the RIO & switch, and reboot the radio so changes take effect.</li>
+    </ul>
+  </li>
+</ol>
+
+</Steps>
+
+
+---
+
+<Aside type="tip">
+Your radio is now flashed with the latest firmware and configured for use at home.
+You can connect it directly to your PC over WiFI and control it via Driver Station
+</Aside>
+
+
+

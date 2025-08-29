@@ -1,28 +1,151 @@
 ---
-title: Setup Your Local Machine
+title: Setup Your Local Machine 🖥️
 description: "This guide shows the reader how to properly configure their machine so they are ready to begin development"
 sidebar:
-    order: 2
+  order: 2
 ---
 
-The purpose of this guide is to help onboard new programmers to our by installing the neccesary software on their local machine.
+import {LinkCard, Steps, Icon, Aside} from '@astrojs/starlight/components'
+
+
+
+The purpose of this guide is to help onboard new programmers by installing the necessary software on their local machine.
+By the end, you’ll have everything needed to build and deploy robot code, run devcontainers, and collaborate with the team.
+
+---
 
 ## Prerequisites
 
-- Windows 11
-- Laptop Computer
-- Internet Access
-- Admin Privileges
+- Windows 11 laptop
+- Internet access
+- Admin privileges
 - Basic command line knowledge
-- ~20 mins
+- ~20 minutes
 
-## VSCode
+---
 
-VSCode is a free text editor by Microsoft. It is beginner friendly, supports devcontainers, and has git built in, making it a perfect choice for our team.
-You can download VSCode by clicking [here](https://code.visualstudio.com/Download). Click the download button that corresponds to your operating system/CPU architecture,
-open the installer in the File Explorer, and follow the installation dialog.
+## 1. Install VS Code
 
+<Aside type="note" title="Why VS Code?">
+VS Code is beginner-friendly, supports **Dev Containers**, and has Git built in — making it the perfect editor for our team.
+</Aside>
 
+1. Download from [code.visualstudio.com](https://code.visualstudio.com/Download).
+2. Select the installer for **Windows x64**.
+3. Run the installer from **File Explorer** and follow the prompts.
+4. Once installed, open VS Code and sign in with a GitHub or Microsoft account (optional but recommended).
 
+<Aside type="tip">
+Install the **Remote Development** and **Docker** extensions when prompted.
+</Aside>
 
+---
 
+## 2. Install NI Game Tools
+
+These tools are required to communicate with the roboRIO.
+
+1. Download the latest **NI FRC Game Tools** from the official FIRST link:
+   👉 [NI Game Tools Download](https://www.ni.com/en-us/support/downloads/drivers/download.frc-game-tools.html)
+2. Run the installer and accept defaults.
+3. Restart your computer after installation.
+
+---
+
+## 3. Install WPILib
+
+WPILib is the core library and tooling for FRC robot programming.
+
+1. Go to the official releases:
+   👉 [WPILib GitHub Releases](https://github.com/wpilibsuite/allwpilib/releases)
+2. Download the latest **WPILib Installer for Windows**.
+3. Run the installer. It will:
+   - Install VS Code FRC extensions
+   - Install the RoboRIO imaging tool
+   - Set up Gradle for robot builds
+
+<Aside type="caution" title="Important">
+Always use the **team’s agreed WPILib version** during build season. Different versions can cause build errors.
+</Aside>
+
+---
+
+## 4. Install Python
+
+Some of our tools and scripts rely on Python.
+
+1. Download Python from [python.org/downloads](https://www.python.org/downloads/).
+2. Choose the latest **Python 3.x (Windows installer)**.
+3. Run the installer and check the box **“Add Python to PATH”**.
+4. Verify installation:
+
+```bash
+python --version
+pip --version
+```
+
+---
+
+## 5. Install Docker Desktop
+
+Docker lets us run **Dev Containers** for a consistent environment across all machines.
+
+1. Download from [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/).
+2. Run the installer, accept defaults.
+3. Enable **WSL 2 backend** when prompted.
+4. Restart your computer.
+5. Verify Docker is running from the system tray.
+
+Check Docker works:
+
+```bash
+docker --version
+```
+
+---
+
+## 6. Install WSL (Windows Subsystem for Linux)
+
+WSL provides a Linux environment on Windows. This is what Dev Containers use.
+
+1. Open **PowerShell** as Administrator.
+2. Run:
+
+```powershell
+wsl --install
+```
+
+3. This installs **Ubuntu** by default. Restart when prompted.
+4. After reboot, set a username/password for your Ubuntu environment.
+5. Update Ubuntu packages:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+6. Verify:
+
+```bash
+wsl --list --verbose
+```
+
+---
+
+## 7. Test Dev Containers in VS Code
+
+1. Open VS Code.
+2. Install the **Dev Containers** extension (if not already installed).
+3. Clone a test repo (like our docs site):
+
+```bash
+git clone https://github.com/Team4504/docs.git
+cd docs
+```
+
+4. When VS Code prompts **“Reopen in Container”**, click it.
+5. The container should build and open inside VS Code.
+
+<Aside type="tip" title="✅ Success">
+If you reach this point, your machine is fully set up for FRC development.
+You can now contribute to robot code, docs, or CAD tooling using the same environment as everyone else.
+</Aside>
