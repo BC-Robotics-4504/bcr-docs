@@ -23,7 +23,8 @@
         "davidanson.vscode-markdownlint",
         "github.vscode-pull-request-github",
         "eamodio.gitlens",
-        "unifiedjs.vscode-mdx"
+        "unifiedjs.vscode-mdx",
+        "bradlc.vscode-tailwindcss"
       ],
       "settings": {
         "editor.formatOnSave": true,

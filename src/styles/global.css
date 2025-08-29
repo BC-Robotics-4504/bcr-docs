@@ -6,17 +6,17 @@
 
 @theme {
   /* Generated accent color palettes. */
-  --color-accent-200: #fcd542;
-  --color-accent-600: #756f00;
-  --color-accent-900: #373400;
-  --color-accent-950: #282500;
+  --color-accent-200: #dfc684;
+  --color-accent-600: #0870a1;
+  --color-accent-900: #3f3000;
+  --color-accent-950: #2e2200;
   /* Generated gray color palettes. */
-  --color-gray-100: #f1f7ff;
-  --color-gray-200: #e3effe;
-  --color-gray-300: #b4c4d6;
-  --color-gray-400: #718eb1;
-  --color-gray-500: #3f5a7a;
-  --color-gray-700: #203a57;
-  --color-gray-800: #0d88ae;
-  --color-gray-900: #0e1926;
+  --color-gray-100: #f0f8fc;
+  --color-gray-200: #e2f0f9;
+  --color-gray-300: #b3c5cf;
+  --color-gray-400: #6f91a4;
+  --color-gray-500: #3c5d6f;
+  --color-gray-700: #1c3c4d;
+  --color-gray-800: #092a3a;
+  --color-gray-900: #0c1a21;
 }
