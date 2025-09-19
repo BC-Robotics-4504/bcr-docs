@@ -1,13 +1,11 @@
 ---
 title: Setup Your Local Machine 🖥️
-description: "This guide shows the reader how to properly configure their machine so they are ready to begin development"
+description: 'This guide shows the reader how to properly configure their machine so they are ready to begin development'
 sidebar:
   order: 2
 ---
 
-import {LinkCard, Steps, Icon, Aside} from '@astrojs/starlight/components'
-
-
+import { LinkCard, Steps, Icon, Aside } from '@astrojs/starlight/components';
 
 The purpose of this guide is to help onboard new programmers by installing the necessary software on their local machine.
 By the end, you’ll have everything needed to build and deploy robot code, run devcontainers, and collaborate with the team.
@@ -27,7 +25,8 @@ By the end, you’ll have everything needed to build and deploy robot code, run 
 ## 1. Install VS Code
 
 <Aside type="note" title="Why VS Code?">
-VS Code is beginner-friendly, supports **Dev Containers**, and has Git built in — making it the perfect editor for our team.
+  VS Code is beginner-friendly, supports **Dev Containers**, and has Git built in — making it the
+  perfect editor for our team.
 </Aside>
 
 1. Download from [code.visualstudio.com](https://code.visualstudio.com/Download).
@@ -36,7 +35,7 @@ VS Code is beginner-friendly, supports **Dev Containers**, and has Git built in 
 4. Once installed, open VS Code and sign in with a GitHub or Microsoft account (optional but recommended).
 
 <Aside type="tip">
-Install the **Remote Development** and **Docker** extensions when prompted.
+  Install the **Remote Development** and **Docker** extensions when prompted.
 </Aside>
 
 ---
@@ -65,7 +64,8 @@ WPILib is the core library and tooling for FRC robot programming.
    - Set up Gradle for robot builds
 
 <Aside type="caution" title="Important">
-Always use the **team’s agreed WPILib version** during build season. Different versions can cause build errors.
+  Always use the **team’s agreed WPILib version** during build season. Different versions can cause
+  build errors.
 </Aside>
 
 ---
@@ -135,17 +135,25 @@ wsl --list --verbose
 
 1. Open VS Code.
 2. Install the **Dev Containers** extension (if not already installed).
+   - Open the VSCode Extension menu (Ctrl+Shift+X)
+   - Search for Dev Containers
+   - Click Install
+
 3. Clone a test repo (like our docs site):
 
+<Aside type="note">
+  Ensure you followed the steps in the Git Setup guide to install Git on your system
+</Aside>
 ```bash
-git clone https://github.com/Team4504/docs.git
-cd docs
-```
+git clone https://github.com/BC-Robotics-4504/bcr-docs
+
+cd bcr-docs
+ ```
 
 4. When VS Code prompts **“Reopen in Container”**, click it.
 5. The container should build and open inside VS Code.
 
 <Aside type="tip" title="✅ Success">
-If you reach this point, your machine is fully set up for FRC development.
-You can now contribute to robot code, docs, or CAD tooling using the same environment as everyone else.
+  If you reach this point, your machine is fully set up for FRC development. You can now contribute
+  to robot code, docs, or CAD tooling using the same environment as everyone else.
 </Aside>
