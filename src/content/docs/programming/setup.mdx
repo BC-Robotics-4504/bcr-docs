@@ -22,21 +22,42 @@ By the end, you’ll have everything needed to build and deploy robot code, run 
 
 ---
 
-## 1. Install VS Code
+## 1. Install IntelliJ IDEA
 
-<Aside type="note" title="Why VS Code?">
-  VS Code is beginner-friendly, supports **Dev Containers**, and has Git built in — making it the
-  perfect editor for our team.
+<Aside type="note" title="Why IntelliJ?">
+  IntelliJ IDEA is a powerful IDE for JVM and cross-language development with first-class Gradle support,
+  robust Git integration, and excellent debugging. Our team prefers IntelliJ for robot code development.
 </Aside>
 
-1. Download from [code.visualstudio.com](https://code.visualstudio.com/Download).
-2. Select the installer for **Windows x64**.
-3. Run the installer from **File Explorer** and follow the prompts.
-4. Once installed, open VS Code and sign in with a GitHub or Microsoft account (optional but recommended).
+1. Download IntelliJ IDEA:
+   - https://www.jetbrains.com/idea/download/
+   - Choose **Community** (free) or **Ultimate** (if you have a license) → **Windows x64**.
+2. Run the installer and follow the prompts. Accept defaults unless you have a personal preference.
+3. After installation, open IntelliJ and install or enable these recommended plugins:
+   - Docker (for interacting with containers)
+   - Gradle (usually built-in)
+
+
+4. Configure the JDK / Project SDK:
+   - Install the team’s agreed JDK version (ask the team if unsure).
+   - In IntelliJ: File → Project Structure → SDKs → Add the installed JDK.
+   - When opening a Gradle-based robot project, IntelliJ will prompt to use an SDK — select the team JDK.
+
+5. Clone and open the repo:
+   - Use IntelliJ’s VCS menu: VCS → Get from Version Control → paste (replace OUR_REPO with the repo name):
+     https://github.com/BC-Robotics-4504/OUR_REPO
+   - Or clone on the command line and open the folder in IntelliJ:
+   ```bash
+   git clone https://github.com/BC-Robotics-4504/bcr-docs
+   cd bcr-docs
+   ```
+   - Open the project in IntelliJ (File → Open)
 
 <Aside type="tip">
-  Install the **Remote Development** and **Docker** extensions when prompted.
+  If you prefer the exact Dev Container workflow (automatic environment provisioning), VS Code's Dev Containers integration is more seamless.
+  IntelliJ can still work with Docker/WSL via the Docker plugin and remote toolchains, but that requires extra configuration.
 </Aside>
+
 
 ---
 
@@ -70,18 +91,31 @@ WPILib is the core library and tooling for FRC robot programming.
 
 ---
 
-## 4. Install Python
+## 4. Install OpenJDK 17
 
-Some of our tools and scripts rely on Python.
+OpenJDK 17 (LTS) is the recommended Java runtime for our Gradle and robot builds.
 
-1. Download Python from [python.org/downloads](https://www.python.org/downloads/).
-2. Choose the latest **Python 3.x (Windows installer)**.
-3. Run the installer and check the box **“Add Python to PATH”**.
-4. Verify installation:
+1. Download Eclipse Temurin (OpenJDK 17) from Adoptium:
+  👉 https://adoptium.net/temurin/releases/?version=17
+  - Choose the Windows x64 MSI installer for an easy install.
 
-```bash
-python --version
-pip --version
+2. Run the MSI installer and accept defaults.
+  - If the installer offers to set JAVA_HOME, enable that option.
+
+3. If JAVA_HOME wasn't set automatically, add it manually:
+  - Settings → System → About → Advanced system settings → Environment Variables
+  - Under System variables: New
+    - Variable name: JAVA_HOME
+    - Variable value: C:\Program Files\Eclipse Adoptium\jdk-17.x.x (adjust for the installed folder)
+  - Edit the System PATH and add: %JAVA_HOME%\bin
+
+4. Restart any open terminals (or your PC) so environment changes take effect.
+
+5. Verify the installation:
+
+PowerShell:
+```sh
+javac --version
 ```
 
 ---
@@ -130,30 +164,3 @@ wsl --list --verbose
 ```
 
 ---
-
-## 7. Test Dev Containers in VS Code
-
-1. Open VS Code.
-2. Install the **Dev Containers** extension (if not already installed).
-   - Open the VSCode Extension menu (Ctrl+Shift+X)
-   - Search for Dev Containers
-   - Click Install
-
-3. Clone a test repo (like our docs site):
-
-<Aside type="note">
-  Ensure you followed the steps in the Git Setup guide to install Git on your system
-</Aside>
-```bash
-git clone https://github.com/BC-Robotics-4504/bcr-docs
-
-cd bcr-docs
- ```
-
-4. When VS Code prompts **“Reopen in Container”**, click it.
-5. The container should build and open inside VS Code.
-
-<Aside type="tip" title="✅ Success">
-  If you reach this point, your machine is fully set up for FRC development. You can now contribute
-  to robot code, docs, or CAD tooling using the same environment as everyone else.
-</Aside>
