@@ -2,3 +2,220 @@
 title: Team Documentation
 description: "Welcome to programming!"
 ---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+This guide is designed to introduce non-technical members of our team to contribute to new documentation to this website.
+
+If you didn't read the entries regarding Git/GitHub I advise you read them [here](/programming/git)
+
+In order to contribute documentation, there are several tools and skills you will need to have a solid understanding of.
+
+## Install tools
+
+<Steps>
+<ol>
+  <li>
+    <h3>Visual Studio Code + Dev Containers</h3>
+    <ol>
+      <li>Download VS Code for your platform from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>.</li>
+      <li>Run the installer and launch VS Code once it completes.</li>
+      <li>Install the <strong>Dev Containers</strong> and <strong>GitHub Pull Requests</strong> extensions from the Extensions view.</li>
+      <li>Sign in with your Microsoft or GitHub account to sync settings between machines (optional but recommended).</li>
+      <li>
+        <p>Verify the command line launcher works: open a terminal and run:</p>
+        <pre><code>code --version</code></pre>
+      </li>
+    </ol>
+  </li>
+
+  <li>
+    <h3>Node.js (includes npm)</h3>
+    <ol>
+      <li>Grab the current LTS installer from <a href="https://nodejs.org/en">nodejs.org</a> (macOS pkg, Windows .msi, or Linux instructions).</li>
+      <li>Run the installer and accept defaults so Node, npm, and PATH entries are configured automatically.</li>
+      <li>Reopen your terminal to ensure the new PATH is picked up.</li>
+      <li>
+        <p>Confirm both Node and npm are available:</p>
+        <pre><code>node --version
+npm --version</code></pre>
+      </li>
+    </ol>
+    <Aside type="note">
+      Installing the LTS channel ensures compatibility with Astro, Bun, and our CI builds.
+    </Aside>
+  </li>
+
+  <li>
+    <h3>WSL 2 + Docker Desktop (Windows)</h3>
+    <ol>
+      <li>
+        <p>Open PowerShell as Administrator and install WSL + Ubuntu:</p>
+        <pre><code>wsl --install --distribution Ubuntu</code></pre>
+      </li>
+      <li>Restart when prompted, then create your Linux username/password.</li>
+      <li>
+        <p>Update packages in Ubuntu:</p>
+        <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+      </li>
+      <li>Download <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>, run the installer, and enable the WSL 2 backend.</li>
+      <li>After Docker launches, go to Settings → Resources → WSL Integration and turn it on for Ubuntu.</li>
+      <li>
+        <p>Verify everything is wired up from PowerShell or the VS Code terminal:</p>
+        <pre><code>wsl --list --verbose
+docker version</code></pre>
+      </li>
+    </ol>
+    <Aside type="caution">
+      Docker Desktop needs to be running before you attach a Dev Container; keep it open in the system tray.
+    </Aside>
+  </li>
+
+  <li>
+    <h3>Google Chrome</h3>
+    <ol>
+      <li>Download Chrome from <a href="https://www.google.com/chrome/">google.com/chrome</a>.</li>
+      <li>Run the installer (drag the app into Applications on macOS, or follow the Windows wizard).</li>
+      <li>Sign in with your robotics Google account to sync bookmarks and extensions.</li>
+      <li>Install the <strong>React DevTools</strong> and <strong>Lighthouse</strong> extensions to help debug documentation changes.</li>
+      <li>Set Chrome as your default browser so Dev Server links open there automatically.</li>
+    </ol>
+  </li>
+
+  <li>
+    <h3>Bun Runtime</h3>
+    <ol>
+      <li>
+        <p>Open a terminal and run the official install script:</p>
+        <pre><code>curl -fsSL https://bun.sh/install | bash</code></pre>
+      </li>
+      <li>Restart your terminal (or source your shell profile) so the <code>bun</code> binary is on PATH.</li>
+      <li>Inside the repo root, run <code>bun install</code> once to install dependencies with Bun’s package manager.</li>
+      <li>
+        <p>Verify Bun is available:</p>
+        <pre><code>bun --version</code></pre>
+      </li>
+    </ol>
+    <Aside type="caution">
+      The installer modifies your shell profile (<code>.bashrc</code>, <code>.zshrc</code>, etc.). Review the changes if you keep custom PATH tweaks.
+    </Aside>
+  </li>
+</ol>
+</Steps>
+
+---
+
+## Clone the Repository & Open the Dev Container
+
+1. Pick a working folder (for example `~/Projects`) and clone the docs site:
+
+   ```bash
+   git clone https://github.com/BC-Robotics-4504/bcr-docs.git
+   cd bcr-docs
+   ```
+
+2. Launch VS Code from the repo root so the Dev Container definition is detected:
+
+   ```bash
+   code .
+   ```
+
+3. When VS Code prompts to “Reopen in Container,” click it. Confirm Docker Desktop is running first or the build will fail.
+4. Wait for the container to build (first run takes 3‑5 minutes). Once it finishes you’ll see `Dev Container: bcr-docs` in the status bar.
+5. Open a terminal inside VS Code (`Ctrl+``) and install dependencies if needed:
+
+   ```bash
+   bun install
+   ```
+
+6. Start the local dev server:
+
+   ```bash
+   bun run dev
+   ```
+
+   VS Code will forward the port; open the browser link to preview live changes.
+
+<Aside type="tip">
+  If you ever need to rebuild the container, use the Command Palette → “Dev Containers: Rebuild Container.”
+</Aside>
+
+---
+
+## Where to Put Documentation
+
+- All docs live under `src/content/docs`. Group topics by the existing folder structure (`programming`, `electronics`, etc.).
+- Create a new `.mdx` file in the correct folder. Example: `src/content/docs/programming/Contributing/new-guide.mdx`.
+- Each file begins with frontmatter:
+
+  ```md
+  ---
+  title: Awesome Topic
+  description: 'One-line summary'
+  sidebar:
+    order: 5
+  ---
+  ```
+
+- After the frontmatter, write Markdown as usual. MDX adds the ability to import components (e.g., `Aside`, `Steps`) and use them inline.
+- Basic MDX reminders:
+  - Headings use `#`, `##`, `###`.
+  - Wrap code blocks with triple backticks and add a language (` ```bash `).
+  - Use JSX-style syntax for components:
+
+    ```mdx
+    import { Aside } from '@astrojs/starlight/components';
+
+    <Aside type="note">Short callouts keep readers on track.</Aside>
+    ```
+
+- Keep sentences short and add bullet lists for instructions; Starlight prefers concise paragraphs.
+
+<Aside type="note">
+  Run `bun run lint:content` (if available) before committing to catch broken frontmatter or invalid MDX.
+</Aside>
+
+---
+
+## Git Workflow: Branch, Commit, and PR
+
+Follow this flow so your changes are easy to review.
+
+1. Make sure `main` is up to date:
+
+   ```bash
+    git checkout main
+    git pull origin main
+   ```
+
+2. Create a feature branch that describes your work:
+
+   ```bash
+   git checkout -b docs/add-contributing-guide
+   ```
+
+3. Edit or add MDX files, then check what changed:
+
+   ```bash
+   git status
+   ```
+
+4. Stage and commit with a descriptive message:
+
+   ```bash
+   git add src/content/docs/programming/Contributing/docs-site.mdx
+   git commit -m "docs: expand contributor install & workflow guide"
+   ```
+
+5. Push the branch to GitHub:
+
+   ```bash
+   git push -u origin docs/add-contributing-guide
+   ```
+
+6. Open GitHub, you’ll see a “Compare & pull request” banner. Click it, fill in the summary, and submit the PR.
+7. Share the PR link in the team channel for review. Once approved, merge via the GitHub UI.
+
+<Aside type="caution">
+  Never commit directly to <code>main</code>. Always work through a feature branch and pull request so every change is reviewed.
+</Aside>

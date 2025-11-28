@@ -2,3 +2,199 @@
 title: Robot Code
 description: "Welcome to programming!"
 ---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+This guide walks new programmers through contributing to our FRC robot codebase. You’ll install the same tools the programming subteam uses, clone the repository, understand the layout, and follow the workflow for proposing changes.
+
+---
+
+## Required Tooling
+
+<Steps>
+<ol>
+  <li>
+    <h3>IntelliJ IDEA + WPILib Extensions</h3>
+    <ol>
+      <li>Download IntelliJ IDEA (Community or Ultimate) from <a href="https://www.jetbrains.com/idea/download/">jetbrains.com/idea/download</a>.</li>
+      <li>Install the <strong>WPILib</strong> and <strong>Gradle</strong> plugins (WPILib uses GradleRIO behind the scenes).</li>
+      <li>
+        <p>Install WPILib tools separately for Driver Station integration:</p>
+        <pre><code>https://github.com/wpilibsuite/allwpilib/releases</code></pre>
+      </li>
+    </ol>
+    <Aside type="tip">
+      VS Code with the official WPILib extension also works, but the team standardizes on IntelliJ for deeper Gradle debugging.
+    </Aside>
+  </li>
+
+  <li>
+    <h3>Java 17 (Temurin)</h3>
+    <ol>
+      <li>Download Temurin OpenJDK 17 MSI/PKG from <a href="https://adoptium.net/temurin/releases/?version=17">adoptium.net</a>.</li>
+      <li>Install with defaults and ensure <code>JAVA_HOME</code> is set to the installed path.</li>
+      <li>
+        <p>Verify the toolchain:</p>
+        <pre><code>java -version
+javac -version</code></pre>
+      </li>
+    </ol>
+  </li>
+
+  <li>
+    <h3>Git + GitHub CLI (optional)</h3>
+    <ol>
+      <li>Install Git from <a href="https://git-scm.com/downloads">git-scm.com</a> (or via Homebrew/winget).</li>
+      <li>
+        <p>Configure your identity:</p>
+        <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@team4504.org"</code></pre>
+      </li>
+      <li>Install <a href="https://cli.github.com/">GitHub CLI</a> if you prefer pushing/PRs from terminal.</li>
+    </ol>
+  </li>
+
+  <li>
+    <h3>Vendor & Driver Tools</h3>
+    <ol>
+      <li>Install the latest CTRE Phoenix Tuner (for Talon / Victor controllers) and REV Hardware Client (for Spark MAX).</li>
+      <li>Keep the roboRIO imaging tool (bundled with WPILib) handy for deploy day.</li>
+      <li>Optional: install <strong>FRC Driver Station</strong> on your dev laptop for quick tethered testing.</li>
+    </ol>
+    <Aside type="caution">
+      Always match vendor library versions in <code>build.gradle</code>. Mixing Phoenix/REV releases causes deploy failures.
+    </Aside>
+  </li>
+</ol>
+</Steps>
+
+---
+
+## Clone & Build the Robot Code
+
+1. Pick a working directory and clone the robot repository (replace with the actual repo name if different):
+
+   ```bash
+   git clone https://github.com/BC-Robotics-4504/robot-code.git
+   cd robot-code
+   ```
+
+2. Import the project into IntelliJ:
+   - From the Welcome screen choose **Open**, select the `robot-code` folder.
+   - Let IntelliJ finish syncing Gradle (watch the status bar).
+
+3. Run the initial dependency download:
+
+   ```bash
+   ./gradlew vendorDeps
+   ./gradlew build
+   ```
+
+   The first build pulls WPILib and vendor libraries into `~/.gradle`.
+
+4. Configure the WPILib project settings:
+   - `WPILib Preferences` → set Team Number to **4504** so deploy targets the right roboRIO.
+   - Confirm `Simulation` settings match your operating system (GUI enabled).
+
+5. Start a simulation test to verify everything works:
+
+   ```bash
+   ./gradlew simulateJava
+   ```
+
+6. For Windows devs, run IntelliJ inside WSL 2 or make sure the WPILib tools have USB access if deploying over USB.
+
+<Aside type="note">
+  If Gradle fails with SSL or cache errors, delete the `.gradle` folder in the repo and re-run <code>./gradlew build</code>.
+</Aside>
+
+---
+
+## Project Layout & Coding Guidelines
+
+- `src/main/java/frc/robot`
+  - `Constants.java`: only place for robot-wide constants. Keep fields `public static final`.
+  - `subsystems/`: classes extending `SubsystemBase` that control hardware (Drivetrain, Shooter, etc.).
+  - `commands/`: `Command` implementations referencing subsystems and operator controls.
+  - `RobotContainer.java`: binds commands to joystick buttons and schedules default commands.
+- `src/main/deploy/`: files copied to the roboRIO filesystem (paths, JSON configs).
+- `src/test/java`: JUnit tests (use `GradleRIO`'s test runner). Add tests for math helpers, path planners, etc.
+- `vendordeps/`: JSON definitions for CTRE/REV. Commit these files when updating vendor libraries.
+
+Basic rules:
+
+```mdx
+- One subsystem per hardware group.
+- No hardware references from commands other than through subsystem APIs.
+- Keep blocking `Thread.sleep` out of robot code; use `Command::waitSeconds`.
+- Document new commands/subsystems with short class Javadoc + inline comments when logic is tricky.
+```
+
+<Aside type="tip">
+  Run `./gradlew spotlessApply` (if configured) before committing. It auto-formats Java to match the style guide.
+</Aside>
+
+---
+
+## Day-to-Day Workflow
+
+1. Make sure `main` is current:
+
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
+
+2. Create a branch for your task (ex: new auto routine):
+
+   ```bash
+   git checkout -b feat/add-4-note-auto
+   ```
+
+<Aside type="note">
+  Branches use the format <code>feat/short-description</code>, <code>fix/issue-id</code>, or <code>docs/topic</code>. Commits follow Conventional Commits (e.g., <code>feat: add arm PID</code>, <code>fix(subsystems): null-check gyro</code>) so history stays readable.
+</Aside>
+
+3. Implement the feature:
+   - Add or update subsystems/commands/constants as needed.
+   - Update `RobotContainer` bindings.
+   - Document operator instructions in the `readme` or driver notes if required.
+
+4. Test locally:
+   - `./gradlew test` for unit tests.
+   - `./gradlew simulateJava` for logic validation.
+   - Deploy to a practice robot with `./gradlew deploy` (requires network to roboRIO).
+
+5. Review diffs and commit:
+
+   ```bash
+   git status
+   git add src/main/java/frc/robot/subsystems/Drivetrain.java
+   git commit -m "feat: add swerve teleop hold heading"
+   ```
+
+6. Push and open a PR:
+
+   ```bash
+   git push -u origin feat/add-4-note-auto
+   gh pr create --fill # optional GitHub CLI helper
+   ```
+
+7. Request at least one reviewer from the programming lead. Incorporate feedback, re-run tests, and mark the PR ready to merge.
+
+<Aside type="caution">
+  Never merge if <code>./gradlew build</code> fails or if practice robot testing hasn’t happened for changes touching drivetrain or autonomous logic.
+</Aside>
+
+---
+
+## Deploy Checklist
+
+- [ ] Branch rebased/merged with latest `main`.
+- [ ] `./gradlew build` passes.
+- [ ] Simulation behaves as expected.
+- [ ] Tested on physical robot (if hardware change).
+- [ ] Driver station notes updated if controls changed.
+- [ ] Pull request approved and merged via GitHub.
+
+Following these steps keeps the robot codebase stable and ensures everyone can reproduce your environment quickly. Welcome to the programming team! 🚀
