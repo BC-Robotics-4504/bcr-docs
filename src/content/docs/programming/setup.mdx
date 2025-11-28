@@ -36,14 +36,9 @@ By the end, you’ll have everything needed to build and deploy robot code, run 
 3. After installation, open IntelliJ and install or enable these recommended plugins:
    - Docker (for interacting with containers)
    - Gradle (usually built-in)
+   - FRC Plugin
 
-
-4. Configure the JDK / Project SDK:
-   - Install the team’s agreed JDK version (ask the team if unsure).
-   - In IntelliJ: File → Project Structure → SDKs → Add the installed JDK.
-   - When opening a Gradle-based robot project, IntelliJ will prompt to use an SDK — select the team JDK.
-
-5. Clone and open the repo:
+4. Clone and open the repo:
    - Use IntelliJ’s VCS menu: VCS → Get from Version Control → paste (replace OUR_REPO with the repo name):
      https://github.com/BC-Robotics-4504/OUR_REPO
    - Or clone on the command line and open the folder in IntelliJ:
@@ -52,6 +47,7 @@ By the end, you’ll have everything needed to build and deploy robot code, run 
    cd bcr-docs
    ```
    - Open the project in IntelliJ (File → Open)
+   - Press shift twice to open the command pallate, then search for "add build configurations" select it to add the build, simulate, run robot code build configs to your local copy.
 
 <Aside type="tip">
   If you prefer the exact Dev Container workflow (automatic environment provisioning), VS Code's Dev Containers integration is more seamless.
